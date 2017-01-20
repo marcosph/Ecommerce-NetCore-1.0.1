@@ -47,7 +47,7 @@ namespace Ecommerce.Web
 
             services.AddMvc();
            // services.AddAutoMapper();
-
+            //fdf
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("CanWriteCustomerData", policy => policy.Requirements.Add(new ClaimRequirement("Customers", "Write")));
