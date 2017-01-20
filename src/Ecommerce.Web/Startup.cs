@@ -46,7 +46,7 @@ namespace Ecommerce.Web
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
-            services.AddAutoMapper();
+           // services.AddAutoMapper();
 
             services.AddAuthorization(options =>
             {
