@@ -1,4 +1,5 @@
-﻿using Ecommerce.Infra.CrossCutting.Bus;
+﻿using AutoMapper;
+using Ecommerce.Infra.CrossCutting.Bus;
 using Ecommerce.Infra.CrossCutting.Identity.Authorization;
 using Ecommerce.Infra.CrossCutting.Identity.Data;
 using Ecommerce.Infra.CrossCutting.Identity.Models;
@@ -46,8 +47,8 @@ namespace Ecommerce.Web
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
-           // services.AddAutoMapper();
-            //fdf
+            services.AddAutoMapper();
+            // CanRemoveCustomerData
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("CanWriteCustomerData", policy => policy.Requirements.Add(new ClaimRequirement("Customers", "Write")));
@@ -76,7 +77,7 @@ namespace Ecommerce.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
+            
             app.UseStaticFiles();
             app.UseIdentity();
             

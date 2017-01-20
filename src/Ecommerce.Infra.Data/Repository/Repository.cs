@@ -2,6 +2,7 @@
 
 using Ecommerce.Domain.Interfaces;
 using Ecommerce.Infra.Data.Context;
+using Ecommerce.Infra.Data.Helpers;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,7 @@ namespace Ecommerce.Infra.Data.Repository
 
         public virtual void Remove(Guid id)
         {
-            DbSet.Remove(DbSet.Find(id));
+           DbSet.Remove(DbSet.Find(id));
         }
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)

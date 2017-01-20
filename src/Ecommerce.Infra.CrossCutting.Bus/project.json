@@ -1,22 +1,30 @@
 {
-  "version": "1.0.0-*",
-
-  "buildOptions": {
-    "emitEntryPoint": true
-  },
-
-  "frameworks": {
-    "netcoreapp1.0": {
-      "dependencies": {
-        "Microsoft.NETCore.App": {
-          "version": "1.0.1",
-          "type": "platform"
-        }
-      }
+  "dependencies": {
+    "Ecommerce.Domain.Core": "1.0.0-*",
+    "Microsoft.NETCore.App": {
+      "version": "1.0.1",
+      "type": "platform"
     }
   },
 
-  "dependencies": {
-    "Ecommerce.Domain.Core": "1.0.0-*"
+
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": [
+        "dotnet5.6",
+        "portable-net45+win8"
+      ]
+    }
+  },
+
+  "buildOptions": {
+    "emitEntryPoint": true,
+    "preserveCompilationContext": true
+  },
+
+  "runtimeOptions": {
+    "configProperties": {
+      "System.GC.Server": true
+    }
   }
 }

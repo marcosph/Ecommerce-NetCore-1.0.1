@@ -1,26 +1,34 @@
 ﻿{
-  "version": "1.0.0-*",
-
-  "buildOptions": {
-    "emitEntryPoint": true
+  "dependencies": {
+    "AutoMapper": "5.2.0",
+    "System.ComponentModel.Annotations": "4.3.0",
+    "System.ComponentModel.Primitives": "4.3.0",
+    "Microsoft.NETCore.App": {
+      "version": "1.0.1",
+      "type": "platform"
+    },
+    "Ecommerce.Domain": "1.0.0-*",
+    "Ecommerce.Infra.Data": "1.0.0-*"
   },
+
 
   "frameworks": {
     "netcoreapp1.0": {
-      "dependencies": {
-        "Microsoft.NETCore.App": {
-          "version": "1.0.1",
-          "type": "platform"
-        }
-      }
+      "imports": [
+        "dotnet5.6",
+        "portable-net45+win8"
+      ]
     }
   },
 
-  "dependencies": {
-    "Ecommerce.Domain": "1.0.0-*",
-    "Ecommerce.Infra.Data": "1.0.0-*",
-    "AutoMapper": "5.2.0",
-    "System.ComponentModel.Annotations": "4.3.0",
-    "System.ComponentModel.Primitives": "4.3.0"
+  "buildOptions": {
+    "emitEntryPoint": true,
+    "preserveCompilationContext": true
+  },
+
+  "runtimeOptions": {
+    "configProperties": {
+      "System.GC.Server": true
+    }
   }
 }

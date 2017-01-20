@@ -1,0 +1,2 @@
+﻿1- Migrations - dotnet ef migrations add <name-migrations> -o <folder-name> -c <context-name:ex:Ecommerce.Infra.Data.Context.Equinox>
+2- Migratins in folder: dotnet ef migrations add <name-migrations> -o <folder/folder-name> -c <context-name:ex:Ecommerce.Infra.Data.Context.Equinox>
