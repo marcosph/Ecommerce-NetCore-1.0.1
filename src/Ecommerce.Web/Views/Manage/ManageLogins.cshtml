@@ -1,5 +1,6 @@
 ﻿@model ManageLoginsViewModel
-@using Microsoft.AspNetCore.Http.Authentication
+@using System.Threading.Tasks
+@using Ecommerce.Infra.CrossCutting.Identity.Models.ManageViewModels
 @{
     ViewData["Title"] = "Manage your external logins";
 }
@@ -23,13 +24,13 @@
                                 <div>
                                     <input asp-for="@Model.CurrentLogins[index].LoginProvider" name="LoginProvider" type="hidden" />
                                     <input asp-for="@Model.CurrentLogins[index].ProviderKey" name="ProviderKey" type="hidden" />
-                                    <input type="submit" class="btn btn-default" value="Remove" title="Remove this @Model.CurrentLogins[index].LoginProvider login from your account" />
+                                    <input type="submit" class="btn btn-danger" value="Remove" title="Remove this @Model.CurrentLogins[index].LoginProvider login from your account" />
                                 </div>
                             </form>
                         }
                         else
                         {
-                            @: &nbsp;
+                            @: <div class="text-danger">You need set a password to remove the @Model.CurrentLogins[index].LoginProvider login!</div>
                         }
                     </td>
                 </tr>
@@ -46,7 +47,7 @@
             <p>
                 @foreach (var provider in Model.OtherLogins)
                 {
-                    <button type="submit" class="btn btn-default" name="provider" value="@provider.AuthenticationScheme" title="Log in using your @provider.DisplayName account">@provider.AuthenticationScheme</button>
+                    <button type="submit" class="btn btn-info" name="provider" value="@provider.AuthenticationScheme" title="Log in using your @provider.DisplayName account">@provider.AuthenticationScheme</button>
                 }
             </p>
         </div>

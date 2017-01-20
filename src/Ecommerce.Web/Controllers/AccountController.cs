@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using Ecommerce.Web.Models;
-using Ecommerce.Web.Models.AccountViewModels;
-using Ecommerce.Web.Services;
+using Ecommerce.Infra.CrossCutting.Identity.Models;
+using Ecommerce.Infra.CrossCutting.Identity.Services;
+using Ecommerce.Infra.CrossCutting.Identity.Models.AccountViewModels;
 
 namespace Ecommerce.Web.Controllers
 {
@@ -106,6 +105,14 @@ namespace Ecommerce.Web.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
+                // User claim for write customers data
+                user.Claims.Add(new IdentityUserClaim<string>
+                {
+                    ClaimType = "Customers",
+                    ClaimValue = "Write"
+                });
+
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -147,7 +154,17 @@ namespace Ecommerce.Web.Controllers
             // Request a redirect to the external login provider.
             var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
-            return Challenge(properties, provider);
+            var result = Challenge(properties, provider);
+            return result;
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ExternalLoginLogOff(string provider, string returnUrl = null)
+        {
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation(4, "User logged out.");
+            return RedirectToAction("ExternalLogin", "Account", new { provider, returnUrl });
         }
 
         //
@@ -208,6 +225,14 @@ namespace Ecommerce.Web.Controllers
                     return View("ExternalLoginFailure");
                 }
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
+                // User claim for write customers data
+                user.Claims.Add(new IdentityUserClaim<string>
+                {
+                    ClaimType = "Customers",
+                    ClaimValue = "Write"
+                });
+
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

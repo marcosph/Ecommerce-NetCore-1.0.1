@@ -1,13 +1,26 @@
 ﻿{
   "version": "1.0.0-*",
 
-  "dependencies": {
-    "NETStandard.Library": "1.6.0"
+  "buildOptions": {
+    "emitEntryPoint": true
   },
 
   "frameworks": {
-    "netstandard1.6": {
-      "imports": "dnxcore50"
+    "netcoreapp1.0": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "version": "1.0.1",
+          "type": "platform"
+        }
+      }
     }
+  },
+
+  "dependencies": {
+    "Ecommerce.Application": "1.0.0-*",
+    "Ecommerce.Domain": "1.0.0-*",
+    "Ecommerce.Infra.CrossCutting.Identity": "1.0.0-*",
+    "Ecommerce.Infra.Data": "1.0.0-*",
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.1"
   }
 }

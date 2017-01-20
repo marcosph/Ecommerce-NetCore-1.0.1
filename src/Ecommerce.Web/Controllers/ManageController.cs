@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using Ecommerce.Infra.CrossCutting.Identity.Models;
+using Ecommerce.Infra.CrossCutting.Identity.Models.ManageViewModels;
+using Ecommerce.Infra.CrossCutting.Identity.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Ecommerce.Web.Models;
-using Ecommerce.Web.Models.ManageViewModels;
-using Ecommerce.Web.Services;
 
 namespace Ecommerce.Web.Controllers
 {
