@@ -112,7 +112,11 @@ namespace Ecommerce.Web.Controllers
                     ClaimType = "Customers",
                     ClaimValue = "Write"
                 });
-
+                user.Claims.Add(new IdentityUserClaim<string>
+                {
+                    ClaimType = "Customers",
+                    ClaimValue = "Remove"
+                });
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

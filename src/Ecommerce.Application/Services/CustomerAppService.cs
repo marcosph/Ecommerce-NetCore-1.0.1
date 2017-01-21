@@ -8,6 +8,7 @@ using Ecommerce.Domain.Commands;
 using Ecommerce.Domain.Core.Bus;
 using Ecommerce.Domain.Interfaces;
 using Ecommerce.Infra.Data.Repository.EventSourcing;
+using System.Linq;
 
 namespace Ecommerce.Application.Services
 {
@@ -36,7 +37,8 @@ namespace Ecommerce.Application.Services
 
         public CustomerViewModel GetById(Guid id)
         {
-            return _mapper.Map<CustomerViewModel>(_customerRepository.GetById(id));
+            var c = _customerRepository.GetAll().Where(x=>x.Id == id).FirstOrDefault();
+            return _mapper.Map<CustomerViewModel>(c);
         }
 
         public void Register(CustomerViewModel customerViewModel)
